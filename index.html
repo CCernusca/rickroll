@@ -11,24 +11,20 @@
     <!-- Das GIF wird mit dem <img>-Tag eingebunden -->
     <img src="rickroll.gif" alt="Rickroll">
 
-    
-    <h1>Click the Button to Play Sound</h1>
-
-    <!-- Button to trigger sound -->
-    <button onclick="playSound()">Play Sound</button>
-
     <!-- Hidden audio file -->
-    <audio id="rickroll">
+    <audio id="rickroll", preload="auto">
         <source src="rickroll.mp3" type="audio/mpeg">
         <source src="rickroll.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        function playSound() {
+        window.addEventListener('load', function() {
             var sound = document.getElementById("rickroll");
-            sound.play();
-        }
+            sound.play().catch(error => {
+                console.log("Autoplay failed, user interaction is required: " + error);
+            });
+        });
     </script>
     
 </body>
